@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairyPlot: คลังพล็อต</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'mali': ['Mali', 'cursive'],
+                    },
+                    colors: {
+                        'sky-light': '#E0F7FA',   /* ฟ้าอ่อน */
+                        'sky-main': '#81D4FA',    /* ฟ้าสดใส */
+                        'sky-deep': '#29B6F6',    /* ฟ้าเข้ม */
+                        'cloud-white': '#FFFFFF',
+                        'text-dark': '#455A64',   /* เทาเข้มอ่านง่าย */
+                        'text-light': '#78909C',
+                        'accent-gold': '#FFD54F', /* สีทองสำหรับจุดเด่น */
+                        'card-bg': '#F0FDFF',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Mali', cursive;
+            background-color: #E1F5FE;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 20%),
+                radial-gradient(circle at 90% 80%, rgba(129, 212, 250, 0.2) 0%, rgba(129, 212, 250, 0) 30%);
+            color: #455A64;
+            overflow-x: hidden;
+        }
+
+        /* Card Style */
+        .story-card {
+            background: #FFFFFF;
+            border: 2px solid #B3E5FC;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Navigation Links */
+        .nav-item {
+            color: #546E7A;
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            text-decoration: none;
+        }
+        
+        .nav-item:hover {
+            background-color: #E1F5FE;
+            color: #0288D1;
+        }
+
+        /* Headers */
+        .section-title {
+            color: #0277BD;
+            border-left: 5px solid #FFD54F;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Image Display - โชว์รูปชัดเจน */
+        .example-image-box {
+            background-color: #E1F5FE;
+            padding: 10px;
+            border-radius: 15px;
+            border: 2px dashed #81D4FA;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .example-image-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-caption {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #0277BD;
+            font-weight: bold;
+        }
+
+        /* ตัด Animation ทั้งหมด */
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+        
+        a, button, .nav-item {
+            transition: background-color 0.2s, color 0.2s !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="sticky top-0 z-50 bg-white/95 border-b border-sky-100 shadow-sm py-3 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            
+            <div class="flex items-center">
+                <img src="logo/logo.png" alt="FairyPlot Logo" class="h-14 w-auto object-contain">
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2 text-md font-medium">
+                <a href="#three-act" class="nav-item">3 องค์</a>
+                <a href="#hero-journey" class="nav-item">การเดินทาง</a>
+                <a href="#freytag" class="nav-item">พีระมิด</a>
+                <a href="#seven-point" class="nav-item">7 จุด</a>
+                <a href="#dan-harmon" class="nav-item">วงกลม</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="text-center py-16 px-4 bg-white border-b-4 border-sky-100 mb-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-block bg-sky-50 px-4 py-1 rounded-full border border-sky-200 mb-4">
+                <span class="text-sky-600 text-sm font-bold">✨ คลังความรู้สำหรับนักเขียน</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-sky-800 mb-6 leading-tight">
+                ยินดีต้อนรับ
+            </h1>
+            <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+                รวบรวมแผนที่การเล่าเรื่อง (Story Structures) หลากหลายรูปแบบ
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 pb-20 space-y-24">
+
+        <section id="three-act">
+            <h2 class="section-title text-3xl font-bold">1. โครงสร้าง 3 องค์ (The Three-Act Structure)</h2>
+            <div class="story-card">
+                <p class="mb-6 text-lg text-gray-600">
+                    โครงสร้างพื้นฐานที่สุดของการเล่าเรื่อง แบ่งเรื่องราวออกเป็น 3 ส่วนชัดเจน เหมือนการเริ่มต้น เดินทาง และบทสรุป
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div class="example-image-box">
+                        <img src="รูป.jpg/Gemini_Generated_Image_hvqwrohvqwrohvqw.png" alt="ตัวอย่างโครงสร้าง 3 องค์">
+                        <div class="image-caption">ภาพตัวอย่าง: การดำเนินเรื่องแบบ 3 องค์</div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-sky-50 p-4 rounded-xl border border-sky-100">
+                            <h3 class="font-bold text-sky-700 text-lg mb-1">Act I: การเริ่มต้น (Setup)</h3>
+                            <p class="text-sm text-gray-600">แนะนำตัวละครและโลกปกติ จนเกิดเหตุการณ์พลิกผัน (Inciting Incident) ที่ทำให้ต้องออกเดินทาง</p>
+                        </div>
+                        <div class="bg-sky-50 p-4 rounded-xl border border-sky-100">
+                            <h3 class="font-bold text-sky-700 text-lg mb-1">Act II: การเผชิญหน้า (Confrontation)</h3>
+                            <p class="text-sm text-gray-600">ช่วงที่ยาวที่สุด ตัวละครต้องเจออุปสรรค เรียนรู้ และเปลี่ยนแปลง ผ่านจุดกึ่งกลางเรื่อง (Midpoint)</p>
+                        </div>
+                        <div class="bg-sky-50 p-4 rounded-xl border border-sky-100">
+                            <h3 class="font-bold text-sky-700 text-lg mb-1">Act III: บทสรุป (Resolution)</h3>
+                            <p class="text-sm text-gray-600">การต่อสู้ครั้งสุดท้าย (Climax) และผลลัพธ์ที่ตามมา จบลงด้วยสถานะใหม่ของตัวละคร</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hero-journey">
+            <h2 class="section-title text-3xl font-bold">2. การเดินทางของวีรบุรุษ (The Hero's Journey)</h2>
+            <p class="mb-6 text-lg text-gray-600 ml-5">
+                มหากาพย์การผจญภัย 12 ขั้นตอน เหมาะสำหรับเรื่องราวแฟนตาซี หรือการเติบโตของตัวละคร
+            </p>
+            
+            <div class="space-y-8">
+                <div class="story-card bg-white">
+                    <div class="flex flex-col md:flex-row gap-6 items-center">
+                        <div class="w-full md:w-1/3">
+                            <div class="example-image-box">
+                                <img src="รูป.jpg/Gemini_Generated_Image_e8437ve8437ve843-2.png" alt="Hero Journey Part 1">
+                                <div class="image-caption">ภาพตัวอย่าง: ช่วงออกเดินทาง</div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <span class="inline-block bg-sky-100 text-sky-700 px-3 py-1 rounded-lg text-sm font-bold mb-3">Part 1: การออกเดินทาง</span>
+                            <h3 class="font-bold text-xl text-gray-700 mb-2">จากโลกเดิมสู่โลกใหม่</h3>
+                            <p class="text-gray-600">เริ่มจากโลกธรรมดา (Ordinary World) ได้รับเสียงเรียก พบผู้นำทาง และตัดสินใจก้าวข้ามธรณีประตูสู่การผจญภัย</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card bg-white">
+                    <div class="flex flex-col md:flex-row gap-6 items-center">
+                        <div class="w-full md:w-1/3">
+                            <div class="example-image-box">
+                                <img src="รูป.jpg/Gemini_Generated_Image_le3uzple3uzple3u.png" alt="Hero Journey Part 2">
+                                <div class="image-caption">ภาพตัวอย่าง: การเผชิญหน้าและทดสอบ</div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <span class="inline-block bg-sky-100 text-sky-700 px-3 py-1 rounded-lg text-sm font-bold mb-3">Part 2: การเผชิญบททดสอบ</span>
+                            <h3 class="font-bold text-xl text-gray-700 mb-2">บททดสอบและศัตรู</h3>
+                            <p class="text-gray-600">พบพันธมิตรและศัตรู เข้าสู่ถ้ำเสือ (Inmost Cave) และเผชิญกับบททดสอบครั้งสำคัญที่สุด (The Ordeal) ที่เสี่ยงเป็นเสี่ยงตาย</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card bg-white">
+                    <div class="flex flex-col md:flex-row gap-6 items-center">
+                        <div class="w-full md:w-1/3">
+                            <div class="example-image-box">
+                                <img src="รูป.jpg/Gemini_Generated_Image_yntrmayntrmayntr.png" alt="Hero Journey Part 3">
+                                <div class="image-caption">ภาพตัวอย่าง: การกลับคืนสู่เหย้า</div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <span class="inline-block bg-sky-100 text-sky-700 px-3 py-1 rounded-lg text-sm font-bold mb-3">Part 3: การกลับคืน</span>
+                            <h3 class="font-bold text-xl text-gray-700 mb-2">ชัยชนะและการเกิดใหม่</h3>
+                            <p class="text-gray-600">ได้รับรางวัล (Reward) เดินทางกลับ เผชิญหน้าครั้งสุดท้าย (Resurrection) และนำยาวิเศษกลับคืนสู่โลกเดิม (Return with Elixir)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="freytag">
+            <h2 class="section-title text-3xl font-bold">3. พีระมิดของฟรายทัก (Freytag's Pyramid)</h2>
+            <div class="story-card">
+                <div class="flex flex-col lg:flex-row gap-10 items-center">
+                    <div class="w-full lg:w-2/3">
+                        <div class="example-image-box">
+                            <img src="รูป.jpg/Gemini_Generated_Image_9o6fuf9o6fuf9o6f.png" alt="Freytag Pyramid">
+                            <div class="image-caption">ภาพตัวอย่าง: กราฟพีระมิด 5 ขั้นตอน</div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/3 space-y-4">
+                        <h3 class="font-bold text-gray-700 text-xl">เน้นความดราม่า 5 ขั้นตอน</h3>
+                        <ul class="space-y-2 text-gray-600 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="bg-red-100 text-red-500 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs font-bold">1</span>
+                                <span><strong>Exposition:</strong> ปูพื้นเรื่อง</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="bg-orange-100 text-orange-500 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs font-bold">2</span>
+                                <span><strong>Rising Action:</strong> ไต่ระดับความเครียด</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="bg-yellow-100 text-yellow-600 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs font-bold">3</span>
+                                <span><strong>Climax:</strong> จุดพีคที่สุด</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="bg-green-100 text-green-500 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs font-bold">4</span>
+                                <span><strong>Falling Action:</strong> คลี่คลายปม</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="bg-blue-100 text-blue-500 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs font-bold">5</span>
+                                <span><strong>Resolution:</strong> บทสรุปจบ</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="seven-point">
+            <h2 class="section-title text-3xl font-bold">4. โครงสร้าง 7 จุดสำคัญ (7-Point Story Structure)</h2>
+            <div class="story-card">
+                <p class="mb-6 text-lg text-gray-600 text-center">
+                    เทคนิคการวางพล็อตโดย "คิดจากตอนจบ" แล้วย้อนกลับมาหาจุดเริ่มต้น
+                </p>
+                <div class="max-w-4xl mx-auto mb-6">
+                    <div class="example-image-box">
+                        <img src="รูป.jpg/Gemini_Generated_Image_14oyar14oyar14oy.png" alt="7 Point Structure">
+                        <div class="image-caption">ภาพตัวอย่าง: แผนผัง 7 จุดสำคัญ</div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-sky-50 p-3 rounded-lg text-center border border-sky-100">
+                        <div class="text-sky-500 font-bold mb-1">1. Hook</div>
+                        <div class="text-xs text-gray-500">จุดดึงดูดใจ</div>
+                    </div>
+                    <div class="bg-sky-50 p-3 rounded-lg text-center border border-sky-100">
+                        <div class="text-sky-500 font-bold mb-1">2. Plot Turn 1</div>
+                        <div class="text-xs text-gray-500">จุดเปลี่ยนแรก</div>
+                    </div>
+                    <div class="bg-sky-50 p-3 rounded-lg text-center border border-sky-100">
+                        <div class="text-sky-500 font-bold mb-1">3. Pinch 1</div>
+                        <div class="text-xs text-gray-500">แรงบีบคั้นแรก</div>
+                    </div>
+                    <div class="bg-sky-100 p-3 rounded-lg text-center border border-sky-200">
+                        <div class="text-sky-700 font-bold mb-1">4. Midpoint</div>
+                        <div class="text-xs text-gray-600">จุดกึ่งกลาง (เปลี่ยนจากรับเป็นรุก)</div>
+                    </div>
+                    <div class="bg-sky-50 p-3 rounded-lg text-center border border-sky-100">
+                        <div class="text-sky-500 font-bold mb-1">5. Pinch 2</div>
+                        <div class="text-xs text-gray-500">แรงบีบคั้นสอง</div>
+                    </div>
+                    <div class="bg-sky-50 p-3 rounded-lg text-center border border-sky-100">
+                        <div class="text-sky-500 font-bold mb-1">6. Plot Turn 2</div>
+                        <div class="text-xs text-gray-500">จุดเปลี่ยนสุดท้าย</div>
+                    </div>
+                    <div class="bg-sky-50 p-3 rounded-lg text-center border border-sky-100 col-span-2">
+                        <div class="text-sky-500 font-bold mb-1">7. Resolution</div>
+                        <div class="text-xs text-gray-500">บทสรุปที่ตรงข้ามกับตอนต้น</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dan-harmon">
+            <h2 class="section-title text-3xl font-bold">5. วงกลมเรื่องราว (Story Circle)</h2>
+            <div class="story-card">
+                <div class="flex flex-col-reverse md:flex-row gap-8 items-center">
+                    <div class="w-full md:w-1/2">
+                        <h3 class="text-xl font-bold text-gray-700 mb-4">แนวคิดวงกลม 8 ขั้นตอน</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            เน้นการเปลี่ยนแปลงภายในจิตใจ แบ่งเป็นครึ่งบน (โลกปกติ/Order) และครึ่งล่าง (โลกพิเศษ/Chaos)
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 text-sm">
+                            <div class="p-2 border-l-4 border-sky-300 bg-sky-50">1. You (ตัวเอก)</div>
+                            <div class="p-2 border-l-4 border-sky-300 bg-sky-50">5. Find (พบ)</div>
+                            <div class="p-2 border-l-4 border-sky-300 bg-sky-50">2. Need (ต้องการ)</div>
+                            <div class="p-2 border-l-4 border-sky-300 bg-sky-50">6. Take (จ่ายราคา)</div>
+                            <div class="p-2 border-l-4 border-sky-300 bg-sky-50">3. Go (ไป)</div>
+                            <div class="p-2 border-l-4 border-sky-300 bg-sky-50">7. Return (กลับ)</div>
+                            <div class="p-2 border-l-4 border-sky-300 bg-sky-50">4. Search (ค้นหา)</div>
+                            <div class="p-2 border-l-4 border-sky-300 bg-sky-50">8. Change (เปลี่ยน)</div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <div class="example-image-box">
+                             <img src="รูป.jpg/Gemini_Generated_Image_gh6e51gh6e51gh6e.png" alt="Dan Harmon's Story Circle">
+                            <div class="image-caption">ภาพตัวอย่าง: วงกลมของแดน ฮาร์มอน</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-sky-100 py-8 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-sky-300 text-3xl mb-3">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <h3 class="text-xl font-bold text-sky-700 mb-2 font-mali">FairyPlot</h3>
+            <p class="text-gray-400 text-sm">ขอให้มีความสุขกับการเขียนนิยายของคุณ</p>
+        </div>
+    </footer>
+
+</body>
+</html>
